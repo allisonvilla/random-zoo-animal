@@ -1,6 +1,6 @@
 const zooApp = {}
 
-zooApp.apiUrl = 'https://zoo-animal-api.herokuapp.com/animals/rand';
+zooApp.apiUrl = 'https://zoo-animal-api.herokuapp.com/animals/rand/10';
 
 zooApp.init = function() {
     zooApp.getData();
@@ -10,10 +10,10 @@ zooApp.nameEl = document.querySelector('.animal-name');
 zooApp.imgEl = document.querySelector('.img-container'); 
 zooApp.infoEl = document.querySelector('.animal-info'); 
 
+zooApp.userType = '';
+
 // Have an input (drop-down menu) that lets the user choose what type of animal they would like to see
-// I'll need to change the API endpoint to '~/animals/rand/10', then filter the returned array for animal_type that matches the user's input
-// I will want it to return a single object from the array that matches the user's input for animal_type
-// Create an error message if somehow none of those random animals match the user's input
+// Create an error message if somehow none of the random animals match the user's input
 
 zooApp.getData = function() {
     fetch(zooApp.apiUrl)
@@ -21,8 +21,11 @@ zooApp.getData = function() {
             return response.json();
         })
         .then(function(jsonResponse) {
-            // This is where I would filter for the object that matches the user's desired animal_type
-            zooApp.displayData(jsonResponse);
+            // From the returned array of animals, filter for the first object that matches the desired animal_type property
+            zooApp.animalObject = jsonResponse.filter(function(animal) {
+                return animal.animal_type == 'Reptile';
+            })
+            zooApp.displayData(zooApp.animalObject[0]);
         });
     }
     
