@@ -10,8 +10,14 @@
 <body>
     
     <form id="animal-chooser">
-        <!-- Label for dropdown input -->
-        <!-- Dropdown input containing animal types as options -->
+        <label for="type-select">What type of animal would you like to see today?</label>
+        <select name="type-select" id="type-select" required>
+            <option value="">Please select an animal type</option>
+            <option value="Reptile">Reptile</option>
+            <option value="Mammal">Mammal</option>
+            <option value="Bird">Bird</option>
+        </select>
+        <button>Submit</button>
     </form> <!-- END #animal-chooser -->
 
     <div class="animal-container">
@@ -21,6 +27,8 @@
             <ul id="info-list"></ul>
         </div> <!-- END .animal-info -->
     </div> <!-- END .animal-container -->
+
+    <button id="reload-btn">Visit another animal</button>
 
     <footer>
         <p>Built with <a href="https://zoo-animal-api.herokuapp.com/" target="_blank" rel="noopener noreferrer">Zoo Animal API</a></p>

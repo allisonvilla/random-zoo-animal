@@ -3,17 +3,27 @@ const zooApp = {}
 zooApp.apiUrl = 'https://zoo-animal-api.herokuapp.com/animals/rand/10';
 
 zooApp.init = function() {
-    zooApp.getData();
+    zooApp.formEl.addEventListener('submit', function (event) {
+        event.preventDefault();
+        zooApp.userType = zooApp.inputEl.value;
+        zooApp.getData();
+        zooApp.formEl.style.display = 'none';
+        zooApp.reloadBtn.style.display = 'inline-block'; 
+    });
+
+    zooApp.reloadBtn.addEventListener('click', function() {
+        window.location.reload();
+    })
 }
 
 zooApp.nameEl = document.querySelector('.animal-name'); 
 zooApp.imgEl = document.querySelector('.img-container'); 
 zooApp.infoEl = document.querySelector('.animal-info'); 
-
+zooApp.formEl = document.querySelector('#animal-chooser');
+zooApp.inputEl = document.querySelector('#type-select');
+zooApp.reloadBtn = document.querySelector('#reload-btn');
+// User's selected animal type, which will be defined on form submit
 zooApp.userType = '';
-
-// Have an input (drop-down menu) that lets the user choose what type of animal they would like to see
-// Create an error message if somehow none of the random animals match the user's input
 
 zooApp.getData = function() {
     fetch(zooApp.apiUrl)
@@ -21,9 +31,9 @@ zooApp.getData = function() {
             return response.json();
         })
         .then(function(jsonResponse) {
-            // From the returned array of animals, filter for the first object that matches the desired animal_type property
+            // From the returned array of animals, filter for objects that match the desired animal_type property, then display the first one
             zooApp.animalObject = jsonResponse.filter(function(animal) {
-                return animal.animal_type == 'Reptile';
+                return animal.animal_type == zooApp.userType;
             })
             zooApp.displayData(zooApp.animalObject[0]);
         });
