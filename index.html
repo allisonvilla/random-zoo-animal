@@ -5,35 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
-    <title>Random Zoo Animal!</title>
+    <title>🐼 Random Zoo Animal 🐯</title>
 </head>
 <body>
-    
-    <form id="animal-chooser">
-        <label for="type-select">What type of animal would you like to see today?</label>
-        <select name="type-select" id="type-select" required>
-            <option value="">Please select an animal type</option>
-            <option value="Reptile">Reptile</option>
-            <option value="Mammal">Mammal</option>
-            <option value="Bird">Bird</option>
-        </select>
-        <button>Submit</button>
-    </form> <!-- END #animal-chooser -->
+    <div class="wrapper">
+        <!-- Animal Type Form -->
+        <form id="animal-chooser">
+            <label for="type-select">What type of animal would you like to see today?</label>
+            <select name="type-select" id="type-select" required>
+                <option value="">Please select an animal type</option>
+                <option value="Reptile">Reptile</option>
+                <option value="Mammal">Mammal</option>
+                <option value="Bird">Bird</option>
+            </select>
+            <button>Submit</button>
+        </form> <!-- END #animal-chooser -->
 
-    <div class="animal-container">
-        <h2 class="animal-name"></h2>
-        <div class="img-container"></div>
-        <div class="animal-info">
-            <ul id="info-list"></ul>
-        </div> <!-- END .animal-info -->
-    </div> <!-- END .animal-container -->
+        <!-- Animal Display -->
+        <div class="animal-container">
+            <h2 class="animal-name"></h2>
+            <div class="img-container"></div>
+            <div class="animal-info">
+                <ul id="info-list"></ul>
+            </div> <!-- END .animal-info -->
+        </div> <!-- END .animal-container -->
 
-    <button id="reload-btn">Visit another animal</button>
+        <!-- Reload Button -->
+        <button id="reload-btn">Visit another animal</button>
+    </div> <!-- END .wrapper -->
 
     <footer>
-        <p>Built with <a href="https://zoo-animal-api.herokuapp.com/" target="_blank" rel="noopener noreferrer">Zoo Animal API</a></p>
+        <p>Powered by <a href="https://zoo-animal-api.herokuapp.com/" target="_blank" rel="noopener noreferrer">Zoo Animal API</a></p>
+        <p>Made with 💕 by Allison Villa</p>
+        <p class="small-copy">You can view this app's code <a href="https://github.com/allisonvilla/random-zoo-animal" target="_blank" rel="noopener noreferrer">here</a></p>
     </footer>
-
+    
     <!-- Link to JS -->
     <script src='./script.js'></script>
 </body>

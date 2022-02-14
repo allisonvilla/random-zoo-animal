@@ -26,8 +26,6 @@ zooApp.infoEl = document.querySelector('.animal-info');
 zooApp.formEl = document.querySelector('#animal-chooser');
 zooApp.inputEl = document.querySelector('#type-select');
 zooApp.reloadBtn = document.querySelector('#reload-btn');
-// User's selected animal type, which will be defined on form submit
-zooApp.userType = '';
 
 zooApp.getData = function() {
     fetch(zooApp.apiUrl)
