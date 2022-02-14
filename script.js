@@ -1,20 +1,24 @@
 const zooApp = {}
 
-zooApp.apiUrl = 'https://zoo-animal-api.herokuapp.com/animals/rand/10';
-
 zooApp.init = function() {
-    zooApp.formEl.addEventListener('submit', function (event) {
+    // Event listener for form submit
+    zooApp.formEl.addEventListener('submit', function(event) {
         event.preventDefault();
+        // Assign input value to userType variable
         zooApp.userType = zooApp.inputEl.value;
+        // Fetch data from API based on userType
         zooApp.getData();
+        // Hide the form, show reload button
         zooApp.formEl.style.display = 'none';
         zooApp.reloadBtn.style.display = 'inline-block'; 
     });
-
+    // Event listener for reload button
     zooApp.reloadBtn.addEventListener('click', function() {
         window.location.reload();
     })
 }
+
+zooApp.apiUrl = 'https://zoo-animal-api.herokuapp.com/animals/rand/10';
 
 zooApp.nameEl = document.querySelector('.animal-name'); 
 zooApp.imgEl = document.querySelector('.img-container'); 
