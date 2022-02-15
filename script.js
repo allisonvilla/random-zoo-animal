@@ -30,14 +30,27 @@ zooApp.reloadBtn = document.querySelector('#reload-btn');
 zooApp.getData = function() {
     fetch(zooApp.apiUrl)
         .then(function(response) {
-            return response.json();
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error();
+            }
         })
         .then(function(jsonResponse) {
             // From the returned array of animals, filter for objects that match the desired animal_type property, then display the first one
-            zooApp.animalObject = jsonResponse.filter(function(animal) {
+            zooApp.animalArray = jsonResponse.filter(function(animal) {
                 return animal.animal_type == zooApp.userType;
             })
-            zooApp.displayData(zooApp.animalObject[0]);
+            zooApp.animalObject = zooApp.animalArray[0];
+            // Do something else if animalObject == undefined
+            if (typeof zooApp.animalObject === 'undefined') {
+                zooApp.nameEl.textContent = 'Sorry! That animal seems to be asleep right now. Why don\'t you try visiting another one?'
+            } else {
+                zooApp.displayData(zooApp.animalObject);
+            }
+        })
+        .catch(function(error) {
+            zooApp.nameEl.textContent = 'Sorry! The zoo seems to be closed for maintenance. Please come back later.';
         });
     }
     
