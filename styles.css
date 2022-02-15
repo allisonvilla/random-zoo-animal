@@ -12,6 +12,15 @@ body {
     display: flex;
     flex-direction: column; 
     justify-content: space-between;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+h1, h2 {
+    font-family: 'Francois One', sans-serif;
+}
+
+img {
+    max-width: 100%; 
 }
 
 .wrapper {
@@ -25,10 +34,6 @@ body {
     align-items: center; 
     padding-top: 50px;
     padding-bottom: 50px; 
-}
-
-img {
-    max-width: 100%; 
 }
 
 #reload-btn {
