@@ -37,19 +37,19 @@ zooApp.getData = function() {
             }
         })
         .then(function(jsonResponse) {
-            // From the returned array of animals, filter for objects that match the desired animal_type property, then display the first one
+            // From the returned array of animals, filter for objects that match the desired animal_type property, then store the first one in a new variable
             zooApp.animalArray = jsonResponse.filter(function(animal) {
                 return animal.animal_type == zooApp.userType;
             })
             zooApp.animalObject = zooApp.animalArray[0];
-            // Do something else if animalObject == undefined
+            // Display an error message if animalObject == undefined - which happens if there are no returned objects with the desired animal_type property
             if (typeof zooApp.animalObject === 'undefined') {
                 zooApp.nameEl.textContent = 'Sorry! That animal seems to be asleep right now. Why don\'t you try visiting another one?'
             } else {
                 zooApp.displayData(zooApp.animalObject);
             }
         })
-        .catch(function(error) {
+        .catch(function() {
             zooApp.nameEl.textContent = 'Sorry! The zoo seems to be closed for maintenance. Please come back later.';
         });
     }
@@ -60,6 +60,7 @@ zooApp.displayData = function(apiData) {
     // Display animal img
     zooApp.animalImg = document.createElement('img');
     zooApp.animalImg.src = apiData.image_link; 
+    zooApp.animalImg.alt = `A picture of a ${apiData.name}`;
     zooApp.imgEl.appendChild(zooApp.animalImg); 
     // Display animal info
     // Latin Name
