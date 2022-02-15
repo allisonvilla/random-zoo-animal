@@ -1,6 +1,10 @@
 const zooApp = {}
 
 zooApp.init = function() {
+    zooApp.nameEl = document.querySelector('.animal-name');
+    zooApp.formEl = document.querySelector('#animal-chooser');
+    zooApp.inputEl = document.querySelector('#type-select');
+    zooApp.reloadBtn = document.querySelector('#reload-btn');
     // Event listener for form submit
     zooApp.formEl.addEventListener('submit', function(event) {
         event.preventDefault();
@@ -19,13 +23,6 @@ zooApp.init = function() {
 }
 
 zooApp.apiUrl = 'https://zoo-animal-api.herokuapp.com/animals/rand/10';
-
-zooApp.nameEl = document.querySelector('.animal-name'); 
-zooApp.imgEl = document.querySelector('.img-container'); 
-zooApp.infoEl = document.querySelector('.animal-info'); 
-zooApp.formEl = document.querySelector('#animal-chooser');
-zooApp.inputEl = document.querySelector('#type-select');
-zooApp.reloadBtn = document.querySelector('#reload-btn');
 
 zooApp.getData = function() {
     fetch(zooApp.apiUrl)
@@ -55,6 +52,8 @@ zooApp.getData = function() {
     }
     
 zooApp.displayData = function(apiData) {
+    zooApp.imgEl = document.querySelector('.img-container');
+    zooApp.infoEl = document.querySelector('.animal-info'); 
     // Display animal name
     zooApp.nameEl.textContent = apiData.name;
     // Display animal img
