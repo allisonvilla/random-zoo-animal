@@ -20,14 +20,16 @@
             <!-- Animal Type Form -->
             <form id="animal-chooser">
                 <label for="type-select">What type of animal would you like to see today?</label>
-                <select name="type-select" id="type-select" required>
-                    <option value="">Please select an animal type</option>
-                    <option value="Mammal">Mammal</option>
-                    <option value="Bird">Bird</option>
-                    <option value="Reptile">Reptile</option>
-                    <option value="Amphibian">Amphibian</option>
-                </select>
-                <button>Let's Go!</button>
+                <div class="input-btn-container">
+                    <select name="type-select" id="type-select" required>
+                        <option value="">Please select an animal type</option>
+                        <option value="Mammal">Mammal</option>
+                        <option value="Bird">Bird</option>
+                        <option value="Reptile">Reptile</option>
+                        <option value="Amphibian">Amphibian</option>
+                    </select>
+                    <button>Let's Go!</button>
+                </div> <!-- END .input-btn-container -->
             </form> <!-- END #animal-chooser -->
 
             <!-- Animal Display -->
@@ -40,13 +42,15 @@
             </div> <!-- END .animal-container -->
 
             <!-- Reload Button -->
-            <button id="reload-btn">Visit Another Animal</button>
+            <div class="reload-container">
+                <button id="reload-btn">Visit Another Animal</button>
+            </div>
         </main>
     </div> <!-- END .wrapper -->
 
     <footer>
         <p>Made with 💕 by Allison Villa</p>
-        <p>Powered by <a href="https://zoo-animal-api.herokuapp.com/" target="_blank" rel="noopener noreferrer">Zoo Animal API</a></p>
+        <p class="small-copy">Powered by <a href="https://zoo-animal-api.herokuapp.com/" target="_blank" rel="noopener noreferrer">Zoo Animal API</a></p>
         <p class="small-copy">You can view this app's code <a href="https://github.com/allisonvilla/random-zoo-animal" target="_blank" rel="noopener noreferrer">here</a></p>
     </footer>
 

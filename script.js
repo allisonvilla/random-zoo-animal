@@ -4,6 +4,7 @@ zooApp.init = function() {
     zooApp.nameEl = document.querySelector('.animal-name');
     zooApp.formEl = document.querySelector('#animal-chooser');
     zooApp.inputEl = document.querySelector('#type-select');
+    zooApp.animalEl = document.querySelector('.animal-container');
     zooApp.reloadBtn = document.querySelector('#reload-btn');
     // Event listener for form submit
     zooApp.formEl.addEventListener('submit', function(event) {
@@ -12,9 +13,10 @@ zooApp.init = function() {
         zooApp.userType = zooApp.inputEl.value;
         // Fetch data from API based on userType
         zooApp.getData();
-        // Hide the form, show reload button
+        // Hide the form, show animal container div and reload button
         zooApp.formEl.style.display = 'none';
-        zooApp.reloadBtn.style.display = 'inline-block'; 
+        zooApp.reloadBtn.style.display = 'inline-block';
+        zooApp.animalEl.style.display = 'flex';
     });
     // Event listener for reload button
     zooApp.reloadBtn.addEventListener('click', function() {
@@ -42,18 +44,20 @@ zooApp.getData = function() {
             // Display an error message if animalObject == undefined - which happens if there are no returned objects with the desired animal_type property
             if (typeof zooApp.animalObject === 'undefined') {
                 zooApp.nameEl.textContent = 'Sorry! That animal seems to be asleep right now. Why don\'t you try visiting another one?'
+                zooApp.nameEl.style.textTransform = 'none';
             } else {
                 zooApp.displayData(zooApp.animalObject);
             }
         })
         .catch(function() {
             zooApp.nameEl.textContent = 'Sorry! The zoo seems to be closed for maintenance. Please come back later.';
+            zooApp.nameEl.style.textTransform = 'none';
         });
     }
     
 zooApp.displayData = function(apiData) {
     zooApp.imgEl = document.querySelector('.img-container');
-    zooApp.infoEl = document.querySelector('.animal-info'); 
+    zooApp.infoEl = document.querySelector('#info-list'); 
     // Display animal name
     zooApp.nameEl.textContent = apiData.name;
     // Display animal img
@@ -64,39 +68,39 @@ zooApp.displayData = function(apiData) {
     // Display animal info
     // Latin Name
     zooApp.latinNameEl = document.createElement('li');
-    zooApp.latinNameEl.innerHTML = `<span><b>Latin Name: </b></span>${apiData.latin_name}`;
+    zooApp.latinNameEl.innerHTML = `<span>Latin Name:  </span>${apiData.latin_name}`;
     zooApp.infoEl.appendChild(zooApp.latinNameEl); 
     // Animal Type
     zooApp.typeEl = document.createElement('li');
-    zooApp.typeEl.innerHTML = `<span><b>Animal Type: </b></span>${apiData.animal_type}`;
+    zooApp.typeEl.innerHTML = `<span>Animal Type:  </span>${apiData.animal_type}`;
     zooApp.infoEl.appendChild(zooApp.typeEl); 
     // Active Time 
     zooApp.activeEl = document.createElement('li');
-    zooApp.activeEl.innerHTML = `<span><b>Active Time: </b></span>${apiData.active_time}`;
+    zooApp.activeEl.innerHTML = `<span>Active Time:  </span>${apiData.active_time}`;
     zooApp.infoEl.appendChild(zooApp.activeEl); 
     // Length
     zooApp.lengthEl = document.createElement('li');
-    zooApp.lengthEl.innerHTML = `<span><b>Length: </b></span>${apiData.length_min} - ${apiData.length_max} ft.`;
+    zooApp.lengthEl.innerHTML = `<span>Length:  </span>${apiData.length_min} - ${apiData.length_max} ft.`;
     zooApp.infoEl.appendChild(zooApp.lengthEl);
     // Weight 
     zooApp.weightEl = document.createElement('li');
-    zooApp.weightEl.innerHTML = `<span><b>Weight: </b></span>${apiData.weight_min} - ${apiData.weight_max} lbs.`;
+    zooApp.weightEl.innerHTML = `<span>Weight:  </span>${apiData.weight_min} - ${apiData.weight_max} lbs.`;
     zooApp.infoEl.appendChild(zooApp.weightEl);
     // Lifespan
     zooApp.lifespanEl = document.createElement('li');
-    zooApp.lifespanEl.innerHTML = `<span><b>Lifespan: </b></span>${apiData.lifespan} years`;
+    zooApp.lifespanEl.innerHTML = `<span>Lifespan:  </span>${apiData.lifespan} years`;
     zooApp.infoEl.appendChild(zooApp.lifespanEl); 
     // Diet
     zooApp.dietEl = document.createElement('li');
-    zooApp.dietEl.innerHTML = `<span><b>Diet: </b></span>${apiData.diet}`;
+    zooApp.dietEl.innerHTML = `<span>Diet:  </span>${apiData.diet}`;
     zooApp.infoEl.appendChild(zooApp.dietEl); 
     // Habitat
     zooApp.habitatEl = document.createElement('li');
-    zooApp.habitatEl.innerHTML = `<span><b>Habitat: </b></span>${apiData.habitat}`;
+    zooApp.habitatEl.innerHTML = `<span>Habitat:  </span>${apiData.habitat}`;
     zooApp.infoEl.appendChild(zooApp.habitatEl); 
     // Geographical Range 
     zooApp.geoRangeEl = document.createElement('li');
-    zooApp.geoRangeEl.innerHTML = `<span><b>Geographical Range: </b></span>${apiData.geo_range}`;
+    zooApp.geoRangeEl.innerHTML = `<span>Geographical Range:  </span>${apiData.geo_range}`;
     zooApp.infoEl.appendChild(zooApp.geoRangeEl); 
 }
 
