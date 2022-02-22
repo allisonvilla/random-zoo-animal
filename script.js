@@ -63,16 +63,17 @@ zooApp.getData = function() {
     
 zooApp.displayData = function(apiData) {
     // Select elements that will hold animal info
-    zooApp.imgEl = document.querySelector('.img-container');
-    zooApp.infoEl = document.querySelector('#info-list'); 
+    const imgEl = document.querySelector('.img-container');
+    const infoEl = document.querySelector('#info-list'); 
 
     // Display animal name
     zooApp.nameEl.textContent = apiData.name;
+
     // Display animal img
-    zooApp.animalImg = document.createElement('img');
-    zooApp.animalImg.src = apiData.image_link; 
-    zooApp.animalImg.alt = `A picture of a ${apiData.name}`;
-    zooApp.imgEl.appendChild(zooApp.animalImg); 
+    const animalImg = document.createElement('img');
+    animalImg.src = apiData.image_link; 
+    animalImg.alt = `A picture of a ${apiData.name}`;
+    imgEl.appendChild(animalImg); 
 
     // Create new elements with animal details
     // Latin Name
@@ -112,7 +113,7 @@ zooApp.displayData = function(apiData) {
     geoRangeEl.innerHTML = `<span>Geographical Range:  </span>${apiData.geo_range}`;
 
     // Append newly generated elements to info element
-    zooApp.infoEl.append(latinNameEl, typeEl, activeEl, lengthEl, weightEl, lifespanEl, dietEl, habitatEl, geoRangeEl); 
+    infoEl.append(latinNameEl, typeEl, activeEl, lengthEl, weightEl, lifespanEl, dietEl, habitatEl, geoRangeEl); 
 }
 
 zooApp.init();
