@@ -1,13 +1,25 @@
-const zooApp = {}
+const zooApp = {};
 
 zooApp.init = function() {
     zooApp.nameEl = document.querySelector('.animal-name');
+    zooApp.formEvent(); 
+    // Event listener for reload button
+    zooApp.reloadBtn.addEventListener('click', function() {
+        window.location.reload();
+    })
+}
+
+zooApp.apiUrl = 'https://zoo-animal-api.herokuapp.com/animals/rand/10';
+
+zooApp.formEvent = () => {
+    // Select form elements
     zooApp.formEl = document.querySelector('#animal-chooser');
     zooApp.inputEl = document.querySelector('#type-select');
     zooApp.animalEl = document.querySelector('.animal-container');
     zooApp.reloadBtn = document.querySelector('#reload-btn');
+
     // Event listener for form submit
-    zooApp.formEl.addEventListener('submit', function(event) {
+    zooApp.formEl.addEventListener('submit', function (event) {
         event.preventDefault();
         // Assign input value to userType variable
         zooApp.userType = zooApp.inputEl.value;
@@ -18,13 +30,7 @@ zooApp.init = function() {
         zooApp.reloadBtn.style.display = 'inline-block';
         zooApp.animalEl.style.display = 'flex';
     });
-    // Event listener for reload button
-    zooApp.reloadBtn.addEventListener('click', function() {
-        window.location.reload();
-    })
 }
-
-zooApp.apiUrl = 'https://zoo-animal-api.herokuapp.com/animals/rand/10';
 
 zooApp.getData = function() {
     fetch(zooApp.apiUrl)
@@ -56,8 +62,10 @@ zooApp.getData = function() {
     }
     
 zooApp.displayData = function(apiData) {
+    // Select elements that will hold animal info
     zooApp.imgEl = document.querySelector('.img-container');
     zooApp.infoEl = document.querySelector('#info-list'); 
+
     // Display animal name
     zooApp.nameEl.textContent = apiData.name;
     // Display animal img
@@ -65,43 +73,46 @@ zooApp.displayData = function(apiData) {
     zooApp.animalImg.src = apiData.image_link; 
     zooApp.animalImg.alt = `A picture of a ${apiData.name}`;
     zooApp.imgEl.appendChild(zooApp.animalImg); 
-    // Display animal info
+
+    // Create new elements with animal details
     // Latin Name
-    zooApp.latinNameEl = document.createElement('li');
-    zooApp.latinNameEl.innerHTML = `<span>Latin Name:  </span>${apiData.latin_name}`;
-    zooApp.infoEl.appendChild(zooApp.latinNameEl); 
+    const latinNameEl = document.createElement('li');
+    latinNameEl.innerHTML = `<span>Latin Name:  </span>${apiData.latin_name}`;
+
     // Animal Type
-    zooApp.typeEl = document.createElement('li');
-    zooApp.typeEl.innerHTML = `<span>Animal Type:  </span>${apiData.animal_type}`;
-    zooApp.infoEl.appendChild(zooApp.typeEl); 
+    const typeEl = document.createElement('li');
+    typeEl.innerHTML = `<span>Animal Type:  </span>${apiData.animal_type}`;
+
     // Active Time 
-    zooApp.activeEl = document.createElement('li');
-    zooApp.activeEl.innerHTML = `<span>Active Time:  </span>${apiData.active_time}`;
-    zooApp.infoEl.appendChild(zooApp.activeEl); 
+    const activeEl = document.createElement('li');
+    activeEl.innerHTML = `<span>Active Time:  </span>${apiData.active_time}`;
+
     // Length
-    zooApp.lengthEl = document.createElement('li');
-    zooApp.lengthEl.innerHTML = `<span>Length:  </span>${apiData.length_min} - ${apiData.length_max} ft.`;
-    zooApp.infoEl.appendChild(zooApp.lengthEl);
+    const lengthEl = document.createElement('li');
+    lengthEl.innerHTML = `<span>Length:  </span>${apiData.length_min} - ${apiData.length_max} ft.`;
+
     // Weight 
-    zooApp.weightEl = document.createElement('li');
-    zooApp.weightEl.innerHTML = `<span>Weight:  </span>${apiData.weight_min} - ${apiData.weight_max} lbs.`;
-    zooApp.infoEl.appendChild(zooApp.weightEl);
+    const weightEl = document.createElement('li');
+    weightEl.innerHTML = `<span>Weight:  </span>${apiData.weight_min} - ${apiData.weight_max} lbs.`;
+
     // Lifespan
-    zooApp.lifespanEl = document.createElement('li');
-    zooApp.lifespanEl.innerHTML = `<span>Lifespan:  </span>${apiData.lifespan} years`;
-    zooApp.infoEl.appendChild(zooApp.lifespanEl); 
+    const lifespanEl = document.createElement('li');
+    lifespanEl.innerHTML = `<span>Lifespan:  </span>${apiData.lifespan} years`;
+
     // Diet
-    zooApp.dietEl = document.createElement('li');
-    zooApp.dietEl.innerHTML = `<span>Diet:  </span>${apiData.diet}`;
-    zooApp.infoEl.appendChild(zooApp.dietEl); 
+    const dietEl = document.createElement('li');
+    dietEl.innerHTML = `<span>Diet:  </span>${apiData.diet}`;
+
     // Habitat
-    zooApp.habitatEl = document.createElement('li');
-    zooApp.habitatEl.innerHTML = `<span>Habitat:  </span>${apiData.habitat}`;
-    zooApp.infoEl.appendChild(zooApp.habitatEl); 
+    const habitatEl = document.createElement('li');
+    habitatEl.innerHTML = `<span>Habitat:  </span>${apiData.habitat}`;
+
     // Geographical Range 
-    zooApp.geoRangeEl = document.createElement('li');
-    zooApp.geoRangeEl.innerHTML = `<span>Geographical Range:  </span>${apiData.geo_range}`;
-    zooApp.infoEl.appendChild(zooApp.geoRangeEl); 
+    const geoRangeEl = document.createElement('li');
+    geoRangeEl.innerHTML = `<span>Geographical Range:  </span>${apiData.geo_range}`;
+
+    // Append newly generated elements to info element
+    zooApp.infoEl.append(latinNameEl, typeEl, activeEl, lengthEl, weightEl, lifespanEl, dietEl, habitatEl, geoRangeEl); 
 }
 
 zooApp.init();
